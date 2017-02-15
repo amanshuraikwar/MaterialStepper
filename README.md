@@ -4,6 +4,10 @@ MaterialStepper is a custom Android View Library inspired by:
 * https://github.com/fcannizzaro/material-stepper
 * https://github.com/stepstone-tech/android-material-stepper
 
+## ScreenShots
+<img src="https://github.com/amanshuraikwar/MaterialStepper/blob/master/screenshots/screenshot1.png" height="500">
+<img src="https://github.com/amanshuraikwar/MaterialStepper/blob/master/screenshots/screenshot2.png" height="500">
+<img src="https://github.com/amanshuraikwar/MaterialStepper/blob/master/screenshots/screenshot3.png" height="500">
 ## How to use?
 Clone/Download and include in your Android Project and use it or do whatever the hell you want to with it.
 
