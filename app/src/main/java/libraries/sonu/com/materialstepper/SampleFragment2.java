@@ -1,6 +1,5 @@
 package libraries.sonu.com.materialstepper;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,15 +10,15 @@ import android.view.ViewGroup;
  * Created by sonu on 13/2/17.
  */
 
-public class SampleFragment extends StepFragment {
+public class SampleFragment2 extends StepFragment {
 
-    public SampleFragment(){
+    public SampleFragment2(){
         //do nothing
     }
 
     @Override
     public String getStepTitle() {
-        return "Step 1";
+        return "Step 3";
     }
 
     @Override

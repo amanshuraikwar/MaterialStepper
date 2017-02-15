@@ -14,8 +14,8 @@ public class MainActivity extends AppCompatActivity {
         materialStepper = (MaterialStepper) findViewById(R.id.materialStepper);
         materialStepper.setFragmentManager(getSupportFragmentManager());
         materialStepper.addStep(new SampleFragment());
-        materialStepper.addStep(new SampleFragment());
-        materialStepper.addStep(new SampleFragment());
+        materialStepper.addStep(new SampleFragment1());
+        materialStepper.addStep(new SampleFragment2());
     }
 
     @Override
