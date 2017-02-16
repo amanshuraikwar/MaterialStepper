@@ -10,6 +10,8 @@ MaterialStepper is a custom Android View Library inspired by:
 <img src="https://github.com/amanshuraikwar/MaterialStepper/blob/master/screenshots/screenshot3.png" height="500">
 
 ## How to use?
+
+### gradle
 Add this to your (Module:app)'s build.gradle file
 ```gradle
 repositories {
