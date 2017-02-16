@@ -34,8 +34,10 @@ dependencies {
 * Create fragment classes and extend from StepFragment class and Override some methods
 ```java
 import com.sonu.libraries.materialstepper.StepFragment;
-
-public class SampleFragment extends StepFragment {
+/*
+ * N = 1, 2, 3...
+ */
+public class SampleFragmentN extends StepFragment {
 
     public SampleFragment(){
         //do nothing
@@ -81,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         materialStepper = (MaterialStepper) findViewById(R.id.materialStepper);
         materialStepper.setFragmentManager(getSupportFragmentManager());
-        materialStepper.addStep(new SampleFragment());
-        materialStepper.addStep(new SampleFragment());
-        materialStepper.addStep(new SampleFragment());
+        materialStepper.addStep(new SampleFragment1());
+        materialStepper.addStep(new SampleFragment2());
+        materialStepper.addStep(new SampleFragment3());
     }
 
     @Override
