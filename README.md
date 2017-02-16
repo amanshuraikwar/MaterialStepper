@@ -8,20 +8,32 @@ MaterialStepper is a custom Android View Library inspired by:
 <img src="https://github.com/amanshuraikwar/MaterialStepper/blob/master/screenshots/screenshot1.png" height="500">
 <img src="https://github.com/amanshuraikwar/MaterialStepper/blob/master/screenshots/screenshot2.png" height="500">
 <img src="https://github.com/amanshuraikwar/MaterialStepper/blob/master/screenshots/screenshot3.png" height="500">
+
 ## How to use?
-Clone/Download and include in your Android Project and use it or do whatever the hell you want to with it.
+Add this to your (Module:app)'s build.gradle file
+```gradle
+repositories {
+    maven {
+        url 'https://dl.bintray.com/amanshuraikwar/materialstepper'
+    }
+}
+
+dependencies {
+        compile 'com.sonu.libraries.materialstepper:material-stepper:0.0.2'
+}
+```
 
 ### Steps
 * Add the view to your layout xml file
 ```xml
-<libraries.sonu.com.materialstepper.MaterialStepper
+<com.sonu.libraries.materialstepper.MaterialStepper
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/materialStepper"/>
 ```
 * Create fragment classes and extend from StepFragment class and Override some methods
 ```java
-import libraries.sonu.com.materialstepper.StepFragment;
+import com.sonu.libraries.materialstepper.StepFragment;
 
 public class SampleFragment extends StepFragment {
 
@@ -57,7 +69,7 @@ public class SampleFragment extends StepFragment {
 * Add steps to the MaterialStepper
 * Don't forget to call MaterialStepper's onBackPressed() in onBackPressed() of your parent Activity
 ```java
-import libraries.sonu.com.materialstepper.MaterialStepper;
+import com.sonu.libraries.materialstepper.MaterialStepper;
 
 public class MainActivity extends AppCompatActivity {
 
