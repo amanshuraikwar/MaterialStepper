@@ -39,7 +39,7 @@ import com.sonu.libraries.materialstepper.StepFragment;
  */
 public class SampleFragmentN extends StepFragment {
 
-    public SampleFragment(){
+    public SampleFragmentN(){
         //do nothing
     }
 
