@@ -94,21 +94,21 @@ public abstract class StepFragment extends Fragment implements NavigationCallbac
 
     @Override
     public StepFragment onRightCLicked() {
-        viewPagerCallbacks.swipeToPage(this.stepIndex+1);
         this.status = COMPLETED;
+        viewPagerCallbacks.swipeToPage(this, this.stepIndex+1);
         return this;
     }
 
     @Override
     public StepFragment onLeftClicked() {
-        viewPagerCallbacks.swipeToPage(this.stepIndex-1);
+        viewPagerCallbacks.swipeToPage(this, this.stepIndex-1);
         return this;
     }
 
     @Override
     public StepFragment onSkipClicked(){
-        viewPagerCallbacks.swipeToPage(this.stepIndex+1);
         this.status = SKIPPED;
+        viewPagerCallbacks.swipeToPage(this, this.stepIndex+1);
         return this;
     }
 

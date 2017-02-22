@@ -1,1 +1,1 @@
-include ':app', ':material-stepper'
+include ':app', ':material-stepper', ':materialstepperdevdemo', ':materialstepperexample'

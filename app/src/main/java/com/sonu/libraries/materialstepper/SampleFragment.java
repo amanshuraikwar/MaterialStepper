@@ -19,7 +19,7 @@ public class SampleFragment extends Fragment {
 
 //    @Override
 //    public String getStepTitle() {
-//        return "Step 1";
+//        return "Step Title";
 //    }
 //
 //    @Override

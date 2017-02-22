@@ -11,6 +11,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/material-stepper" />
+            <option value="$PROJECT_DIR$/materialstepperdevdemo" />
+            <option value="$PROJECT_DIR$/materialstepperexample" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,6 +38,7 @@ public class MaterialStepper
     private LinearLayout navigationBarViewHolder, statusBarViewHolder;
     private HorizontalScrollView statusBarScrollView;
     private Button rightButton, leftButton, skipButton;
+    private OnLastStepNextListener onLastStepNextListener;
 
     private int defaultTabCircleColor = Color.GRAY;
     private int defaultTabTextColor = Color.GRAY;
@@ -75,6 +77,14 @@ public class MaterialStepper
         super(context, attrs, defStyle);
         mContext = context;
         init();
+    }
+
+    public OnLastStepNextListener getOnLastStepNextListener() {
+        return onLastStepNextListener;
+    }
+
+    public void setOnLastStepNextListener(OnLastStepNextListener onLastStepNextListener) {
+        this.onLastStepNextListener = onLastStepNextListener;
     }
 
     public int getDefaultTabCircleColor() {
@@ -143,6 +153,12 @@ public class MaterialStepper
 
     private void init() {
         dataArray = new SparseArrayCompat<>();
+        onLastStepNextListener = new OnLastStepNextListener() {
+            @Override
+            public void onLastStepNext() {
+                Toast.makeText(mContext, "Last Step Next Clicked",Toast.LENGTH_SHORT).show();
+            }
+        };
         View v = inflate(getContext(), R.layout.material_stepper, this);
         stepsViewpager = (MaterialStepperViewPager) v.findViewById(R.id.stepsViewpager);
         navigationBar = (CardView) v.findViewById(R.id.navigationBar);
@@ -156,6 +172,22 @@ public class MaterialStepper
                 return true;
             }
         });
+
+//        statusBarScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+//            @Override
+//            public void onScrollChanged() {
+//                View view = statusBarViewHolder.getChildAt(currentFragment.getStepIndex());
+//                int[] location = new int[2];
+//                view.getLocationOnScreen(location);
+//                int x = location[0];
+//                int y = location[1];
+//                float density  = getResources().getDisplayMetrics().density;
+//                if(!(x/density >= 12)) {
+//                    scrollStatusBar(currentPosition);
+//                }
+//            }
+//        });
+
         rightButton = (Button) v.findViewById(R.id.rightButton);
         leftButton = (Button) v.findViewById(R.id.leftButton);
         skipButton = (Button) v.findViewById(R.id.skipButton);
@@ -275,10 +307,11 @@ public class MaterialStepper
         initAdapter();
     }
 
-    public void onBackPressed() {
+    public int onBackPressed() {
         if(stepsAdapter.getItem(currentPosition).canGoBack()) {
             leftButton.performClick();
         }
+        return currentPosition;
     }
 
     public final void addStep(StepFragment stepFragment){
@@ -327,19 +360,29 @@ public class MaterialStepper
             rightButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    handleStatusOnNext(navigationCallbacks.onRightCLicked());
+                    if( currentFragment.getStepIndex() == (stepsAdapter.getCount()-1)) {
+                        navigationCallbacks.onRightCLicked();
+                        onLastStepNextListener.onLastStepNext();
+                    } else {
+                        navigationCallbacks.onRightCLicked();
+                    }
                 }
             });
             leftButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    handleStatusOnNext(navigationCallbacks.onLeftClicked());
+                    navigationCallbacks.onLeftClicked();
                 }
             });
             skipButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    handleStatusOnNext(navigationCallbacks.onSkipClicked());
+                    if( currentFragment.getStepIndex() == (stepsAdapter.getCount()-1)) {
+                        navigationCallbacks.onSkipClicked();
+                        onLastStepNextListener.onLastStepNext();
+                    } else {
+                        navigationCallbacks.onSkipClicked();
+                    }
                 }
             });
         }
@@ -404,7 +447,8 @@ public class MaterialStepper
     }
 
     @Override
-    public void swipeToPage(int index) {
+    public void swipeToPage(StepFragment currentFragment, int index) {
+        handleStatusOnNext(currentFragment);
         stepsViewpager.setCurrentItem(index);
     }
 

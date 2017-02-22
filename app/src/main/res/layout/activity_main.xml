@@ -4,11 +4,11 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sonu.libraries.materialstepper.MainActivity">
-<!--
-    <com.sonu.libraries.materialstepper.MaterialStepper
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/materialStepper"/>
-        -->
+    tools:context=".MainActivity">
+
+    <!--<com.sonu.devdemo.materialstepper.MaterialStepper-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/materialStepper"/>-->
+
 </RelativeLayout>

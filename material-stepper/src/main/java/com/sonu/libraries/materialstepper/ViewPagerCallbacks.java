@@ -5,5 +5,5 @@ package com.sonu.libraries.materialstepper;
  */
 
 public interface ViewPagerCallbacks {
-    void swipeToPage(int index);
+    void swipeToPage(StepFragment currentFragment,int index);
 }
