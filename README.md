@@ -7,6 +7,9 @@ MaterialStepper is a custom Android View Library inspired by:
 ### To the source(code)
 * https://github.com/amanshuraikwar/MaterialStepper/tree/master/material-stepper
 
+### TO the example app
+* https://github.com/amanshuraikwar/MaterialStepper/tree/master/materialstepperexample
+
 ### How is this library different from others?
 * This provides a View instead of Activity classes to extend from, making it simpler to use.
 * You can customize the functionality of **Next**, **Back** and **Skip** buttons and decide manually when to go to next/ previous step.
