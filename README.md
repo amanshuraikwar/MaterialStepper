@@ -7,7 +7,7 @@ MaterialStepper is a custom Android View Library inspired by:
 ### To the source(code)
 * https://github.com/amanshuraikwar/MaterialStepper/tree/master/material-stepper
 
-### TO the example app
+### To the example app
 * https://github.com/amanshuraikwar/MaterialStepper/tree/master/materialstepperexample
 
 ### How is this library different from others?
