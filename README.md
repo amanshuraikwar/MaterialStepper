@@ -7,6 +7,9 @@ MaterialStepper is a custom Android View Library inspired by:
 ### To the source(code)
 * https://github.com/amanshuraikwar/MaterialStepper/tree/master/material-stepper
 
+### To the example app
+* https://github.com/amanshuraikwar/MaterialStepper/tree/master/materialstepperexample
+
 ### How is this library different from others?
 * This provides a View instead of Activity classes to extend from, making it simpler to use.
 * You can customize the functionality of **Next**, **Back** and **Skip** buttons and decide manually when to go to next/ previous step.
@@ -23,14 +26,8 @@ MaterialStepper is a custom Android View Library inspired by:
 ### gradle
 Add this to your (Module:app)'s build.gradle file
 ```gradle
-repositories {
-    maven {
-        url 'https://dl.bintray.com/amanshuraikwar/materialstepper'
-    }
-}
-
 dependencies {
-        compile 'com.sonu.libraries.materialstepper:material-stepper:0.0.2'
+        compile 'com.sonu.libraries.materialstepper:material-stepper:0.0.4'
 }
 ```
 
@@ -98,6 +95,7 @@ public class SampleFragmentN extends StepFragment {
 * Don't forget to call MaterialStepper's onBackPressed() in onBackPressed() of your parent Activity
 ```java
 import com.sonu.libraries.materialstepper.MaterialStepper;
+import com.sonu.libraries.materialstepper.OnLastStepNextListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -116,12 +114,24 @@ public class MainActivity extends AppCompatActivity {
         materialStepper.addStep(new SampleFragment1());
         materialStepper.addStep(new SampleFragment2());
         materialStepper.addStep(new SampleFragment3());
+        
+        //adding functionality when NEXT button is clicked on last step
+        materialStepper.setOnLastStepNextListener(new OnLastStepNextListener() {
+            @Override
+            public void onLastStepNext() {
+                //some action
+            }
+        });
     }
 
     @Override
     public void onBackPressed() {
         //calling onBackPressed for handling back presses in MaterialStepper View
-        materialStepper.onBackPressed();
+        //onBackPressed() returns step index of currently displayed step
+        //if the return value is 0 then call super for default functionality
+        if( materialStepper.onBackPressed() == 0) {
+            super.onBackPressed();
+        }
     }
 }
 ```
@@ -145,22 +155,55 @@ Read further if you need to use the library to its full potential
 ```java
     @Override
     public StepFragment onRightCLicked() {
-        viewPagerCallbacks.swipeToPage(this.stepIndex+1);
         this.status = COMPLETED;
+        viewPagerCallbacks.swipeToPage(this, this.stepIndex+1);
         return this;
     }
 
     @Override
     public StepFragment onLeftClicked() {
-        viewPagerCallbacks.swipeToPage(this.stepIndex-1);
+        viewPagerCallbacks.swipeToPage(this, this.stepIndex-1);
         return this;
     }
 
     @Override
     public StepFragment onSkipClicked(){
-        viewPagerCallbacks.swipeToPage(this.stepIndex+1);
         this.status = SKIPPED;
+        viewPagerCallbacks.swipeToPage(this, this.stepIndex+1);
         return this;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(canGoBack()) {
+            onLeftClicked();
+        }
+    }
+```
+* Always set the **status** before calling **swipeToPage()** because the StepTab is updated in that method
+* Implementation of **swipeToPage()** is given below to give you an idea about functionality
+```java
+    @Override
+    public void swipeToPage(StepFragment currentFragment, int index) {
+        handleStatusOnNext(currentFragment);
+        stepsViewpager.setCurrentItem(index);
+    }
+    
+    private void handleStatusOnNext(StepFragment stepFragment) {
+        int status = stepFragment.getStatus();
+        switch (status) {
+            case StepFragment.INCOMPLETE:
+                setDefaultTab(stepFragment);
+                break;
+            case StepFragment.SKIPPED:
+                setSkippedTab(stepFragment);
+                break;
+            case StepFragment.COMPLETED:
+                setCompletedTab(stepFragment);
+                break;
+            default:
+                Log.e(TAG, "handleStatus():invalid status");
+        }
     }
 ```
 ### Customizing OnClickListeners of **Next**, **Back** and **Skip** buttons
