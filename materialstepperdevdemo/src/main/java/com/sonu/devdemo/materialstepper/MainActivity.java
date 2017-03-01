@@ -13,8 +13,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.sonu.libraries.materialstepper.R.layout.activity_main);
-        materialStepper = (MaterialStepper) findViewById(com.sonu.libraries.materialstepper.R.id.materialStepper);
+        setContentView(R.layout.activity_main);
+        materialStepper = (MaterialStepper) findViewById(R.id.materialStepper);
         materialStepper.setFragmentManager(getSupportFragmentManager());
         materialStepper.addStep(new SampleFragment());
         materialStepper.addStep(new SampleFragment());
