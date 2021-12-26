@@ -1,4 +1,4 @@
-# MaterialStepper
+# MaterialStepper (No Longer Maintained)
 MaterialStepper is a custom Android View Library inspired by:
 * https://material.io/guidelines/components/steppers.html
 * https://github.com/fcannizzaro/material-stepper
